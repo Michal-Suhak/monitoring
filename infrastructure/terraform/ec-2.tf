@@ -26,6 +26,7 @@ resource "aws_instance" "app-instance" {
   instance_type         = "t2.micro"
   key_name              = var.key_pair_name
   security_groups       = [aws_security_group.ssh-security-group.name]
+  user_data = file("app-bootstrap-script.sh")
 
   root_block_device {
     volume_type           = "gp2"
