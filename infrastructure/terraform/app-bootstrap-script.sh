@@ -21,7 +21,5 @@ cd app || exit
 
 
 # Install dependencies and run app
-pwd
-
 poetry install
 poetry run fastapi run app.py
