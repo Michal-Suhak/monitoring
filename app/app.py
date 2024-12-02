@@ -1,7 +1,19 @@
+import logging
+
 from fastapi import FastAPI
 
 from app.schemas import Task
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("/var/log/fastapi/app.log"),
+        logging.StreamHandler(),
+    ]
+)
+
+logger = logging.getLogger("app")
 app = FastAPI()
 
 tasks = []
