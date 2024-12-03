@@ -5,10 +5,15 @@ echo "Bootstrap script started"
 
 # Update packages
 apt update
+apt upgrade -y
 apt install -y python3-pip
 apt install -y python3-poetry
 
-# clone app code
+# Install Cloud Watch Agent
+wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+dpkg -i amazon-cloudwatch-agent.deb
+
+# Clone app code
 git init app
 cd app || exit
 git remote add origin https://github.com/Michal-Suhak/monitoring.git
@@ -34,4 +39,4 @@ chmod 644 /var/log/fastapi/fastapi.log
 
 # Install dependencies and run app
 poetry install
-poetry uvicorn app.app:app --host 0.0.0.0 --port 8000 --reload
+poetry run uvicorn monitoring.main:app --host 0.0.0.0 --port 8000 --reload
