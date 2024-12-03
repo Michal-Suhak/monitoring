@@ -1,8 +1,7 @@
 import logging
 
 from fastapi import FastAPI
-
-from app.monitoring.schemas import Task
+from .schemas import Task
 
 logging.basicConfig(
     level=logging.INFO,
